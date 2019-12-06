@@ -91,6 +91,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 &ndash;&gt;-->
         <!--<dependency>-->
             <!--<groupId>org.thymeleaf</groupId>-->

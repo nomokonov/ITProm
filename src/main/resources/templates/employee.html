@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<div th:replace="fragments/fragments::top-navigation-panel"></div>
 <div th:each="employee : ${employeers_list}"
      th:text="${employee.name}">employee</div>
 

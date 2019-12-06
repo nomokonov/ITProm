@@ -25,7 +25,7 @@
             <div class="navbar-header">
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <span id="logo-span" class="navbar-brand navbar-left">JM-CRM</span>
+                        <span id="logo-span" class="navbar-brand navbar-left">DB Employeers</span>
                         <div class="container-fluid">
                             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                                 <div class="col-sm-auto"></div>
@@ -42,38 +42,12 @@
             <div class="navbar-collapse collapse">
 
                 <ul id="nav-bar-list" class="nav navbar-nav">
-                    <!--                    <li><a href="/client">Доски</a></li>-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle board-links" href="#" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Доски
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu board-links-ul">
-                            <!--                            <li><a th:each="board : ${boards}" th:text="${board.name}" class="dropdown-item" th:href="'/'+${board.id}"></a></li>-->
-                        </ul>
-                    </li>
-                    <li><a href="/courses">Направления</a></li>
+
+                    <li><a href="/employeers">Сотрудники</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
-                            Клиенты
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/client/allClients">Все клиенты</a></li>
-                            <li><a class="dropdown-item" href="/student/all">Все студенты</a></li>
-                            <li><a sec:authorize="hasAnyAuthority('OWNER', 'ADMIN','HR','MENTOR')" class="dropdown-item"
-                                   href="/hr/students">Пропавшие студенты</a></li>
-                        </ul>
-                    </li>
-                    <!--                    <li><a href="/student-status/all" sec:authorize="hasAnyAuthority('OWNER','HR','MENTOR')">Статусы-->
-                    <!--                        обучения</a></li>-->
-                    <li class="nav-item dropdown">
-                        <a sec:authorize="hasAnyAuthority('OWNER', 'ADMIN','HR','MENTOR')"
-                           class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            Рассылка
+                            Отделы
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -82,174 +56,23 @@
                         </ul>
                     </li>
 
-                    <!--                    <li><a href="/vk/campaigns/all" sec:authorize="hasAnyAuthority('OWNER', 'ADMIN')">Продвижение</a></li>-->
-                    <li><a href="/calls" sec:authorize="hasAnyAuthority('OWNER', 'ADMIN', 'MENTOR','HR')">Звонки</a>
+                    <li><a href="/calls" >Звонки</a>
                     </li>
                     <li><a href="/tasks">Задачи</a></li>
                     <li class="nav-item dropdown">
-                        <a sec:authorize="hasAnyAuthority('OWNER', 'ADMIN','HR')" class="nav-link dropdown-toggle"
+                        <a  class="nav-link dropdown-toggle"
                            href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
-                            Сотрудники
+                            Должности
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="/mentors">Менторы</a></li>
-                            <li><a sec:authorize="hasAnyAuthority('OWNER', 'ADMIN')" class="dropdown-item"
+                            <li><a  class="dropdown-item"
                                    href="/hr/managers">Координаторы</a></li>
                         </ul>
                     </li>
-                    <li><a href="/analytics" sec:authorize="hasAnyAuthority('OWNER', 'ADMIN')">Аналитика</a></li>
 
-                    <li class="nav-item dropdown">
-                        <a sec:authorize="hasAnyAuthority('OWNER', 'ADMIN')" class="nav-link dropdown-toggle" href="#"
-                           id="navbarDropdownMenuImport" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            Экспорт
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#" onclick="exportForBitrix24('csv')">Список клиентов
-                                (*.csv)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="exportForBitrix24('xlsx')">Список клиентов
-                                (*.xlsx)</a></li>
-                            <script>
-                                function exportForBitrix24(formatFile) {
-                                    $.ajax({
-                                        async: false,
-                                        url: '/rest/client/export_in_excel_or_csv',
-                                        method: 'GET',
-                                        data: {formatFile: formatFile},
-                                        success: function (strDir) {
-                                            window.location.replace("/rest/client/getClientsData");
-                                        }
-                                    });
-                                }
-                            </script>
-                        </ul>
-                    </li>
-
-                    <li th:if="${#httpServletRequest.getRequestURI() == '/client'}">
-                        <div class="search-place">
-                            <input id="search-clients" type="text" class="form-control" name="search"
-                                   placeholder="Search"/>
-                        </div>
-                    </li>
-
-
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right" style="right: 0%; position: fixed;">
-                    <li class="nav-item dropdown">
-                        <a class="chat-notifications" id="chatNavbarDropdown" href="#" role="button"
-                           data-toggle="dropdown" style="color: red;display: none;">Новые сообщения</a>
-                        <div class="dropdown-menu" aria-labelledby="chatNavbarDropdown" id="chatNewMessageMenu">
-                            <!--<a class="dropdown-item vk-items" th:id="chatNotifyItem" onclick="showModal(1)">Action</a>-->
-
-                        </div>
-                    </li>
-
-                    <li class="dropdown" th:if="${#httpServletRequest.getRequestURI() == '/client'}"
-                        sec:authorize="hasAnyAuthority('OWNER', 'ADMIN')">
-                        <a class="glyphicon glyphicon-bell redBell"
-                           th:style="${notifications.size() > 0} ? 'color:red' : ''" data-toggle="dropdown"
-                           id="bell"></a>
-                        <ul class="dropdown-menu notification-dropdown" id="Notify">
-                            <th:block th:if="${notifications.size() > 0}">
-                                <th:block>
-                                    <li>
-                                        <button
-                                                type="button" data-toggle="modal"
-                                                class="glyphicon glyphicon-trash pull-right"
-                                                title="Очистить всё"
-                                                th:onclick="'cleanAll()'" id="bucket">
-                                        </button>
-                                    </li>
-                                </th:block>
-                                <th:block th:each="notification : ${notifications}"
-                                          th:if="${notification.client ne null and !notification.client.status.invisible}">
-                                    <th:block
-                                            th:if="${notification.type == T(com.ewp.crm.models.Notification.Type).COMMENT}">
-                                        <li th:class="'menu' + ${notification.client.id}">
-                                            <a data-toggle="modal" class="link-cursor-pointer notify"
-                                               th:attrappend="data-target='#client-'+ ${notification.client.id}+ '-modal'"
-                                               th:onclick="'markAsReadMenu('+ ${notification.client.id} +', 1)'"
-                                               th:text="${'Вас упомянули в карточке ' + notification.client.name + ' ' + notification.client.lastName}">
-                                            </a>
-                                        </li>
-                                    </th:block>
-                                    <th:block
-                                            th:if="${notification.type == T(com.ewp.crm.models.Notification.Type).SMS}">
-                                        <li th:class="'menu' + ${notification.client.id}">
-                                            <a data-toggle="modal" class="notification-header-btn sms-error-btn"
-                                               th:attrappend="data-id=${notification.client.id}"
-                                               th:text="${'Ошибка при отправке сообщения ' + notification.client.name + ' ' + notification.client.lastName}">
-                                            </a>
-                                        </li>
-                                    </th:block>
-                                    <th:block
-                                            th:if="${notification.type == T(com.ewp.crm.models.Notification.Type).POSTPONE}">
-                                        <li th:class="'menu' + ${notification.client.id}">
-                                            <a data-toggle="modal" class="link-cursor-pointer notify"
-                                               th:attrappend="data-target='#client-'+ ${notification.client.id}+ '-modal'"
-                                               th:onclick="'markAsReadMenu('+ ${notification.client.id} +', 1)'"
-                                               th:text="${'Отложенный клиент ' + notification.client.name + ' ' + notification.client.lastName} + ' возвращен на доску'">
-                                            </a>
-                                        </li>
-                                    </th:block>
-                                    <th:block
-                                            th:if="${notification.type == T(com.ewp.crm.models.Notification.Type).EDIT_STATUS}">
-                                        <li th:class="'menu' + ${notification.client.id}">
-                                            <a data-toggle="modal" class="link-cursor-pointer notify"
-                                               th:attrappend="data-target='#client-'+ ${notification.client.id}+ '-modal'"
-                                               th:onclick="'markAsReadMenu('+ ${notification.client.id} +', 1)'"
-                                               th:text="${'У клиента - ' + notification.client.name + ' ' + notification.client.lastName + ' статус изменился на ' + notification.information}">
-                                            </a>
-                                        </li>
-                                    </th:block>
-                                    <th:block
-                                            th:if="${notification.type == T(com.ewp.crm.models.Notification.Type).ASSIGN_SKYPE}">
-                                        <li th:class="'menu' + ${notification.client.id}">
-                                            <a data-toggle="modal" class="link-cursor-pointer notify"
-                                               th:attrappend="data-target='#client-'+ ${notification.client.id}+ '-modal'"
-                                               th:onclick="'markAsReadMenu('+ ${notification.client.id} +', 1)'"
-                                               th:text="${'На ' + notification.information + ' ' + 'у Вас запланирована беседа по Skype c' + ' ' + notification.client.name + ' ' + notification.client.lastName}">
-                                            </a>
-                                        </li>
-                                    </th:block>
-                                </th:block>
-
-                            </th:block>
-                            <th:block th:if="${notifications.size() == 0}">
-                                <li><a>У вас нет новых оповещений</a></li>
-                            </th:block>
-                            <li><a id="noNotify"></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button data-toggle="dropdown" class="user-icon"
-                                th:text="${#strings.substring(#authentication.getPrincipal().getFirstName(), 0,1)
-                                     + #strings.substring(#authentication.getPrincipal().getLastName(), 0,1)}"
-                                th:value="${#authentication.getPrincipal().getFirstName()} + ' ' + ${#authentication.getPrincipal().getLastName()}">
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user/customize" class="glyphicon glyphicon-cog">&nbsp;Настройки</a></li>
-
-                            <li sec:authorize="hasAnyAuthority('OWNER', 'ADMIN','HR','MENTOR')"><a
-                                    th:href="'/admin/user/' + ${#authentication.getPrincipal().getId()}"
-                                    class="glyphicon glyphicon-user">&nbsp;Профиль</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" onclick="document.getElementById('logout').submit();"
-                                   class="glyphicon glyphicon-log-out">&nbsp;Выход</a>
-                                <form action="/logout" id="logout" method="post">
-                                    <input type="hidden"
-                                           th:name="${_csrf.parameterName}"
-                                           th:value="${_csrf.token}"/>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
 
             </div>
