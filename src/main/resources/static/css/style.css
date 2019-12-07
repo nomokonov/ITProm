@@ -1,0 +1,7 @@
+body {
+    padding:  70px 30px 30px 30px;
+    }
+
+.fa-trash:before{
+    color: #ff5412; /*черный цвет*/
+}

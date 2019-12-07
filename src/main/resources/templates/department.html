@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Employeers</title>
+    <title>Department</title>
     <meta charset="UTF-8"/>
     <div th:replace="fragments/fragments::header"></div>
 </head>
@@ -11,10 +11,11 @@
 
 <div th:replace="fragments/fragments::top-navigation-panel"></div>
 <div  >
-    <h2>Сотрудники:</h2>
-    <div th:each="employee : ${employeers_list}"
-         th:text="${employee.name}">employee
+    <h2>Отделы:</h2>
+    <div th:each="department : ${department_list}"
+         th:text="${department.name}">department
     </div>
 </div>
+
 </body>
 </html>

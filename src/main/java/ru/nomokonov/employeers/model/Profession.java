@@ -10,11 +10,19 @@ public class Profession {
     @Column(name = "profession_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "notice")
     private String notice;
+
+    public Profession() {
+    }
+
+    public Profession(String name, String notice) {
+        this.name = name;
+        this.notice = notice;
+    }
 
     public Long getId() {
         return id;
