@@ -1,6 +1,8 @@
 package ru.nomokonov.employeers.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -10,14 +12,27 @@ public class Department {
     @Column(name = "department_id")
     private Long id;
 
-    @Column(name = "parent_id")
-    private Long parent_id;
+
+    @ManyToOne()
+    private Department parent;
+
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+    private Set<Department> children = new HashSet<Department>();
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "notice")
     private String notice;
+
+    public Department() {
+    }
+
+    public Department(String name, String notice, Department parent) {
+        this.name = name;
+        this.notice = notice;
+        this.parent = parent;
+    }
 
     public Long getId() {
         return id;
@@ -27,12 +42,12 @@ public class Department {
         this.id = id;
     }
 
-    public Long getParent_id() {
-        return parent_id;
+    public Department getParent() {
+        return parent;
     }
 
-    public void setParent_id(Long parent_id) {
-        this.parent_id = parent_id;
+    public void setParent(Department parent) {
+        this.parent = parent;
     }
 
     public String getName() {
@@ -49,5 +64,9 @@ public class Department {
 
     public void setNotice(String notice) {
         this.notice = notice;
+    }
+
+    public Set<Department> getChildren() {
+        return children;
     }
 }

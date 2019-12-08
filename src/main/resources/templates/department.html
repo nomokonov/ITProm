@@ -5,17 +5,93 @@
     <title>Department</title>
     <meta charset="UTF-8"/>
     <div th:replace="fragments/fragments::header"></div>
+    <script src="/js/department.js"></script>
 </head>
 
 <body>
 
 <div th:replace="fragments/fragments::top-navigation-panel"></div>
-<div  >
+<div>
     <h2>Отделы:</h2>
-    <div th:each="department : ${department_list}"
-         th:text="${department.name}">department
+    <div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#DepartmentModal">Добавить отдел</button>
+    </div>
+    <br>
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Наименование</th>
+            <th scope="col">Головной отдел</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="department : ${department_list}">
+            <th scope="row" th:text="${department.name}">1</th>
+            <td     th:if="${department.parent}"
+                    th:text="${department.parent.name}">Mark</td>
+            <td     th:unless="${department.parent}" > - </td>
+            <td th:text="${department.notice}">Mark</td>
+            <td>
+                <a href="#" class="fa fa-trash fa-lg"
+                   th:onclick="'deleteDepartmentClick('+ ${department.id} +')'"></a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="#" class="fa fa-edit fa-lg"
+                   th:data-departmentName="${department.name}"
+                   th:data-departmentNotice="${department.notice}"
+                   th:data-departmentParent="(${department.parent}? ${department.parent.id}: '') "
+                   th:onclick="'editDepartmentClick(this,'+ ${department.id} +')'"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal" id="DepartmentModal" tabindex="-1" role="dialog" aria-labelledby="DepartmentModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <form id="departmentForm" action="/department/add/" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DepartmentModalTitle">Новый отдел</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body" class="m-3">
+
+                    <div class="form-group">
+                        <label for="departmentName">Название отдела</label>
+                        <input type="text" name="departmentName" required="required" class="form-control"
+                               id="departmentName"
+                               aria-describedby="Название отдела" placeholder="Название отдела">
+                    </div>
+                    <div class="form-group">
+                        <label for="departmentNotice">Описание</label>
+                        <input type="text" name="departmentNotice" class="form-control" id="departmentNotice"
+                               placeholder="Описание">
+                    </div>
+                    <div class="form-group">
+                        <label for="departmentParent">Головной отдел</label>
+                        <select class="form-control" id="departmentParent" name="departmentParent">
+                            <option value="" selected ></option>
+                            <option th:each="department : ${department_list}"
+                                    th:value="${department.id}" th:text="${department.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary" role="button" id="clientData">Сохранить</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<!--confirmModal-->
+<div th:replace="fragments/fragments::confirmModal"></div>
 
 </body>
 </html>

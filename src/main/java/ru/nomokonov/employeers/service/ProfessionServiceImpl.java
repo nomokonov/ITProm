@@ -50,9 +50,7 @@ public class ProfessionServiceImpl  implements  ProfessionService{
             professionDromDB.setNotice(notice);
             professionRepository.saveAndFlush(professionDromDB);
             return true;
-        }else {
-            return false;
         }
-
+            return false;
     }
 }

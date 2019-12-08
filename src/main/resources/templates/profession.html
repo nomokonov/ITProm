@@ -19,7 +19,7 @@
     </div>
     <br>
     <table class="table table-bordered table-sm">
-        <thead class="thead-dark" >
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Наименование</th>
             <th scope="col">Описание</th>
@@ -61,7 +61,8 @@
 
                     <div class="form-group">
                         <label for="professionName">Название должности</label>
-                        <input type="text" name="professionName" class="form-control" id="professionName"
+                        <input type="text" name="professionName" required="required" class="form-control"
+                               id="professionName"
                                aria-describedby="Название должности" placeholder="Название должности">
                     </div>
                     <div class="form-group">
@@ -81,18 +82,8 @@
     </div>
 </div>
 
-    <!-- Modal confirm -->
-    <div class="modal" id="confirmModal" style="display: none; z-index: 1050;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body" id="confirmMessage">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="confirmOk">Подтвердить</button>
-                    <button type="button" class="btn btn-default" id="confirmCancel">Отмена</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--confirmModal-->
+<div th:replace="fragments/fragments::confirmModal"></div>
+
 </body>
 </html>

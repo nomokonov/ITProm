@@ -40,15 +40,3 @@ function editProfessionClick(element,item_id) {
     $('#ProfessionModal').modal('show');
 }
 
-
-function confirmDialog(message, onConfirm){
-    var fClose = function(){
-        modal.modal("hide");
-    };
-    var modal = $("#confirmModal");
-    modal.modal("show");
-    $("#confirmMessage").empty().append(message);
-    $("#confirmOk").one('click', onConfirm);
-    $("#confirmOk").one('click', fClose);
-    $("#confirmCancel").one("click", fClose);
-}

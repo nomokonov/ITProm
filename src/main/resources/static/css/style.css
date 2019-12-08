@@ -5,3 +5,11 @@ body {
 .fa-trash:before{
     color: #ff5412; /*черный цвет*/
 }
+
+
+.nav__active-tab {
+    border-bottom: 2px solid #333;
+    color: #333!important;
+    background-color: transparent;
+}
+/*.nav__active-tab__text {*/
