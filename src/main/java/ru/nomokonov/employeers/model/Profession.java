@@ -1,6 +1,7 @@
 package ru.nomokonov.employeers.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "profession")
@@ -15,6 +16,9 @@ public class Profession {
 
     @Column(name = "notice")
     private String notice;
+
+    @OneToMany(mappedBy = "profession", fetch = FetchType.EAGER)
+    private List<Employee> employees;
 
     public Profession() {
     }
@@ -46,5 +50,13 @@ public class Profession {
 
     public void setNotice(String notice) {
         this.notice = notice;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

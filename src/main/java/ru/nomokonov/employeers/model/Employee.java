@@ -14,17 +14,24 @@ public class Employee {
     private String fio;
 
     @JoinColumn(name = "department_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Department department;
 
     @JoinColumn(name = "profession_id")
-    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne( cascade = CascadeType.ALL)
     private Profession profession;
 
     @Column(name = "notice")
     private String notice;
 
     public Employee() {
+    }
+
+    public Employee(String employeeName, String employeeNotice, Department department, Profession profession) {
+        this.fio =  employeeName;
+        this.notice = employeeNotice;
+        this.department = department;
+        this.profession = profession;
     }
 
     public Long getId() {
@@ -66,4 +73,6 @@ public class Employee {
     public void setNotice(String notice) {
         this.notice = notice;
     }
+
+
 }

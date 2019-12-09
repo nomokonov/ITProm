@@ -2,6 +2,7 @@ package ru.nomokonov.employeers.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,9 @@ public class Department {
 
     @Column(name = "notice")
     private String notice;
+
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+    private List<Employee> employees;
 
     public Department() {
     }
@@ -68,5 +72,17 @@ public class Department {
 
     public Set<Department> getChildren() {
         return children;
+    }
+
+    public void setChildren(Set<Department> children) {
+        this.children = children;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
