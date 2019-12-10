@@ -25,7 +25,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private List<Department> getTree(List<Department> all) {
         List<Department> root_department = new LinkedList<>();
-        Long level = 0L;
         Iterator<Department> iterator = all.iterator();
         while (iterator.hasNext()) {
             Department department = iterator.next();
@@ -34,37 +33,24 @@ public class DepartmentServiceImpl implements DepartmentService {
                 iterator.remove();
             }
         }
-        iterator = all.iterator();
-        while (iterator.hasNext()) {
-            Department department = iterator.next();
-             int count = 0;
-            for (Department depart: root_department) {
-                count++;
-//            findChilds(all, root_department, department);
-                if ( count == root_department.size() ){
-                    root_department.add(department);
-                    all.remove(department);
-                    break;
-                }
-                if ( department.getId() == depart.getParent().getId() ){
-                    root_department.add(count -1,depart);
-                    all.remove(depart);
+
+        while ( all.size() > 0 ){
+            Iterator<Department> all_iter = all.iterator();
+            while ( all_iter.hasNext()){
+                Department curr_from_all = all_iter.next();
+                Iterator<Department> root_iter = root_department.iterator();
+                while( root_iter.hasNext() ){
+                    Department curr_from_root = root_iter.next();
+                    if ( curr_from_all.getParent().getId() == curr_from_root.getId() ){
+                        root_department.add(root_department.indexOf(curr_from_root)+1,curr_from_all);
+                        all_iter.remove();
+                        break;
+                    }
                 }
             }
         }
-
         return root_department;
     }
-
-//    private void findChilds(List<Department> all, List<Department> root_department, Department department) {
-//        for (Department depart : all) {
-//            if (department.getId() == depart.getParent().getId()) {
-//                root_department.add(root_department.indexOf(department), depart);
-//                all.remove(depart);
-//                findChilds(all, root_department, depart);
-//            }
-//        }
-//    }
 
     @Override
     public void add(String departmentName, String notice, Long departmentParent) {
